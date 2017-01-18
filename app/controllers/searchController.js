@@ -1,31 +1,25 @@
 (function(){
 	var app = angular.module("app")
-	app.controller("searchController", ['$scope',  '$http', '$modal','genreService', 
-		function ($scope,  $http, $modal, genreService) {
+	app.controller("searchController", ['$scope', '$http', 'genreService', 
+		function ($scope,  $http, genreService) {
 		var API_KEY = 'c5850ed73901b8d268d0898a8a9d8bff';
-		var URL = 'https://api.themoviedb.org/3/';
-		var SEARCHMOVIE = 'movie/upcoming';
-		var SEARCHGENRE = 'genre/movie/list';
 		var pageActual = 1;
-		$scope.moviesUpcoming = [];
 		$scope.upcoming = [];
 		
-
-    	$scope.open = function (movie) {
+    	$scope.open = function (movie){
     		$scope.movieSelected = movie;
     	};
 
 		$scope.loadCollections = function(){	
-					loadMovies();
-					loadGenres();
+			loadMovies();
+			loadGenres();
 		}
 
 		loadMovies = function() {
-			var promise = $http.get(URL + SEARCHMOVIE + '?api_key=' + API_KEY + '&language=en-US' + "&page=" + pageActual);
-			promise.then(successCallback,failureCallBack)
+			var promise = $http.get('https://api.themoviedb.org/3/movie/upcoming?api_key=' + API_KEY + '&language=en-US&page=' + pageActual);
+			promise.then(successCallback, failureCallBack)
 
 			function successCallback (result) {
-				$scope.moviesUpcoming = result.data.results	
 				if (pageActual < result.data.total_pages - 1){
 					for (var i = result.data.results.length - 1; i >= 0; i--) {
 						$scope.upcoming.push(result.data.results[i]);
@@ -33,10 +27,9 @@
 					pageActual = pageActual + 1;
 					loadMovies();
 				}
-
 			}
 
-			function failureCallBack(result) {
+			function failureCallBack(result){
 				console.log("failureCallBack", result)
 			}
 		}
@@ -44,7 +37,7 @@
 		loadGenres = function(){
 			genreService.getGenres().then(
 				function( genres ) {
-					$scope.genres = genres.genres;
+					$scope.genres = genres;
 				});			
 		}
 
