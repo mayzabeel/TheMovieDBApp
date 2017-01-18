@@ -20,8 +20,9 @@
 			promise.then(successCallback, failureCallBack)
 
 			function successCallback (result) {
-				if (pageActual < result.data.total_pages - 1){
+				if (pageActual <= result.data.total_pages){
 					for (var i = result.data.results.length - 1; i >= 0; i--) {
+						console.log(pageActual);
 						$scope.upcoming.push(result.data.results[i]);
 					}
 					pageActual = pageActual + 1;
