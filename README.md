@@ -7,15 +7,17 @@ An app for cinephiles and movie hobbyists. This version of the app is very simpl
 * execute npm install http-server -g
 
 ## Getting Started:
-* To execute the App use the comand [npm start]
+* To execute the App use the comand ->>> npm start
 
 ## Package/dependency managers
 NPM
+Chosen by familiarity
 
 ## http-server 
 It is powerful enough for production usage, but it's simple and hackable enough to be used for testing, local development, and learning.
 
 ## AngularJS v1.6.0
+Chosen by familiarity
 
 ## jQuery JavaScript Library v1.12.4
 Used by the Bootstrap Theme.
